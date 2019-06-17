@@ -16,10 +16,11 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
     private Orientation mOrientation;
     private OrientationHandler mOrientationHandler;
+
     private boolean mIsTouchable = true;
+    private OnProgressChangeCallback mOnProgressChangeCallback;
 
     private ProgressHolder mHolder;
-    private OnProgressChangeCallback mOnProgressChangeCallback;
 
     public FSeekLayout(Context context, AttributeSet attrs)
     {
