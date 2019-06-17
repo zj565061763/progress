@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_seek_layout:
                 startActivity(new Intent(this, SeekLayoutActivity.class));
                 break;
+            case R.id.btn_progress_bar:
+                startActivity(new Intent(this, ProgressBarActivity.class));
+                break;
         }
     }
 }
