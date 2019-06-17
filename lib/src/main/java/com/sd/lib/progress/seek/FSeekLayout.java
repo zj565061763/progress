@@ -35,18 +35,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public void setOnProgressChangeCallback(OnProgressChangeCallback callback)
-    {
-        mOnProgressChangeCallback = callback;
-    }
-
-    @Override
-    public Orientation getOrientation()
-    {
-        return mOrientation;
-    }
-
-    @Override
     public int getProgress()
     {
         return getHolder().getProgress();
@@ -68,6 +56,39 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     public float getProgressPercent()
     {
         return getHolder().getProgressPercent();
+    }
+
+    @Override
+    public boolean setProgress(int progress)
+    {
+        final boolean result = getHolder().setProgress(progress);
+        if (result)
+            notifyProgressChanged(false);
+        return result;
+    }
+
+    @Override
+    public void setMinProgress(int progress)
+    {
+        getHolder().setMinProgress(progress);
+    }
+
+    @Override
+    public void setMaxProgress(int progress)
+    {
+        getHolder().setMaxProgress(progress);
+    }
+
+    @Override
+    public Orientation getOrientation()
+    {
+        return mOrientation;
+    }
+
+    @Override
+    public void setOnProgressChangeCallback(OnProgressChangeCallback callback)
+    {
+        mOnProgressChangeCallback = callback;
     }
 
     @Override
@@ -93,27 +114,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     public void setTouchable(boolean touchable)
     {
         mIsTouchable = touchable;
-    }
-
-    @Override
-    public boolean setProgress(int progress)
-    {
-        final boolean result = getHolder().setProgress(progress);
-        if (result)
-            notifyProgressChanged(false);
-        return result;
-    }
-
-    @Override
-    public void setMinProgress(int progress)
-    {
-        getHolder().setMinProgress(progress);
-    }
-
-    @Override
-    public void setMaxProgress(int progress)
-    {
-        getHolder().setMaxProgress(progress);
     }
 
     private void notifyProgressChanged(boolean isTouch)

@@ -5,18 +5,18 @@ import com.sd.lib.progress.ProgressView;
 public interface SeekLayout extends ProgressView
 {
     /**
-     * 设置进度变化回调
-     *
-     * @param callback
-     */
-    void setOnProgressChangeCallback(OnProgressChangeCallback callback);
-
-    /**
      * 返回当前方向{@link Orientation}
      *
      * @return
      */
     Orientation getOrientation();
+
+    /**
+     * 设置进度变化回调
+     *
+     * @param callback
+     */
+    void setOnProgressChangeCallback(OnProgressChangeCallback callback);
 
     /**
      * 设置方向，默认{@link Orientation#Horizontal}
