@@ -1,6 +1,6 @@
 package com.sd.lib.progress;
 
-public class ProgressHolder implements ProgressView
+public abstract class ProgressHolder implements ProgressView
 {
     private int mMinProgress = 0;
     private int mMaxProgress = 100;
@@ -36,7 +36,12 @@ public class ProgressHolder implements ProgressView
     @Override
     public boolean setProgress(int progress)
     {
-        progress = safeProgress(progress);
+        if (progress < mMinProgress)
+            progress = mMinProgress;
+
+        if (progress > mMaxProgress)
+            progress = mMaxProgress;
+
         if (mProgress != progress)
         {
             mProgress = progress;
@@ -55,7 +60,9 @@ public class ProgressHolder implements ProgressView
         {
             mMinProgress = progress;
             checkProgressBound();
-            setProgress(mProgress);
+
+            if (setProgress(mProgress))
+                onProgressFixIntoRange();
         }
     }
 
@@ -72,18 +79,11 @@ public class ProgressHolder implements ProgressView
         {
             mMaxProgress = progress;
             checkProgressBound();
-            setProgress(mProgress);
+
+            if (setProgress(mProgress))
+                onProgressFixIntoRange();
         }
     }
 
-    private int safeProgress(int progress)
-    {
-        if (progress < mMinProgress)
-            progress = mMinProgress;
-
-        if (progress > mMaxProgress)
-            progress = mMaxProgress;
-
-        return progress;
-    }
+    protected abstract void onProgressFixIntoRange();
 }

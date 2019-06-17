@@ -31,7 +31,16 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     private ProgressHolder getHolder()
     {
         if (mHolder == null)
-            mHolder = new ProgressHolder();
+        {
+            mHolder = new ProgressHolder()
+            {
+                @Override
+                protected void onProgressFixIntoRange()
+                {
+                    notifyProgressChanged(false);
+                }
+            };
+        }
         return mHolder;
     }
 
