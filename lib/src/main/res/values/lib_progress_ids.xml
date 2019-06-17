@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 拖动手柄view的id -->
+    <item name="lib_progress_seek_thumb" type="id" />
+
+</resources>
