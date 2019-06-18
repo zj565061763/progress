@@ -486,6 +486,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     {
         if (mOrientationHandler.check())
             mOrientationHandler.onTouchEvent(event);
-        return true;
+        return mIsTouchable;
     }
 }
