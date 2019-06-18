@@ -19,6 +19,7 @@
 
         <activity android:name=".SeekLayoutActivity" />
         <activity android:name=".ProgressBarActivity" />
+        <activity android:name=".SeekBarActivity" />
 
     </application>
 
