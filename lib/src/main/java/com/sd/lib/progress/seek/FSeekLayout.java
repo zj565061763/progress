@@ -70,13 +70,13 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public int getLimitMin()
+    public Integer getLimitMin()
     {
         return getHolder().getLimitMin();
     }
 
     @Override
-    public int getLimitMax()
+    public Integer getLimitMax()
     {
         return getHolder().getLimitMax();
     }

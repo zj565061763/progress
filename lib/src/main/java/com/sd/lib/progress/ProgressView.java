@@ -17,18 +17,18 @@ public interface ProgressView
     int getMax();
 
     /**
-     * 返回限制的最小进度值，默认为0
+     * 返回限制的最小进度值
      *
-     * @return
+     * @return null-表示不限制，即默认和最小值一致
      */
-    int getLimitMin();
+    Integer getLimitMin();
 
     /**
-     * 返回限制的最大进度值，即和Max一致
+     * 返回限制的最大进度值
      *
-     * @return
+     * @return null-表示不限制，即默认和最大值一致
      */
-    int getLimitMax();
+    Integer getLimitMax();
 
     /**
      * 返回进度百分比[0-1]
@@ -55,14 +55,14 @@ public interface ProgressView
     /**
      * 限制进度最小值
      *
-     * @param limit null-表示不限制，即默认值0
+     * @param limit null-表示不限制，即默认和最小值一致
      */
     void setLimitMin(Integer limit);
 
     /**
      * 限制进度最大值
      *
-     * @param limit null-表示不限制，即和Max一致
+     * @param limit null-表示不限制，即默认和最大值一致
      */
     void setLimitMax(Integer limit);
 }
