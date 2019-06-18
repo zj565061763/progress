@@ -13,13 +13,15 @@
 
         <com.sd.lib.progress.pgb.FProgressBar
             android:layout_width="match_parent"
-            android:layout_height="2dp" />
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
 
-        <ImageView
+        <View
             android:id="@id/lib_progress_seek_thumb"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@color/colorAccent" />
+            android:background="@drawable/seek_thumb" />
 
     </com.sd.lib.progress.seek.FSeekLayout>
 
