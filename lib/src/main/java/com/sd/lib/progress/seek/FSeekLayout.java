@@ -24,7 +24,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     private boolean mIsTouchable = true;
 
     private boolean mSynchronizeProgress = true;
-    private boolean mSynchronizeBound = true;
     private List<ProgressView> mListProgressView;
 
     private OnProgressChangeCallback mOnProgressChangeCallback;
@@ -163,17 +162,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         if (mSynchronizeProgress != synchronize)
         {
             mSynchronizeProgress = synchronize;
-            synchronizeChildrenBound();
-        }
-    }
-
-    @Override
-    public void setSynchronizeBound(boolean synchronize)
-    {
-        if (mSynchronizeBound != synchronize)
-        {
-            mSynchronizeBound = synchronize;
-            synchronizeChildrenBound();
+            synchronizeChildrenProgress();
         }
     }
 
@@ -186,6 +175,8 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
             mOnProgressChangeCallback.onProgressChanged(this, getHolder().getProgress(), isTouch);
     }
 
+    //---------- synchronize bound ----------
+
     private void synchronizeChildrenProgress()
     {
         if (mListProgressView != null && mSynchronizeProgress)
@@ -197,9 +188,17 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         }
     }
 
+    private void synchronizeChildProgress(ProgressView view)
+    {
+        if (mSynchronizeProgress)
+            view.setProgress(getHolder().getProgress());
+    }
+
+    //---------- synchronize bound ----------
+
     private void synchronizeChildrenBound()
     {
-        if (mListProgressView != null && mSynchronizeBound)
+        if (mListProgressView != null)
         {
             for (ProgressView item : mListProgressView)
             {
@@ -208,20 +207,11 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         }
     }
 
-    private void synchronizeChildProgress(ProgressView view)
-    {
-        if (mSynchronizeProgress)
-            view.setProgress(getHolder().getProgress());
-    }
-
     private void synchronizeChildBound(ProgressView view)
     {
-        if (mSynchronizeBound)
-        {
-            view.setMax(getHolder().getMax());
-            view.setLimitMin(getHolder().getLimitMin());
-            view.setLimitMax(getHolder().getLimitMax());
-        }
+        view.setMax(getHolder().getMax());
+        view.setLimitMin(getHolder().getLimitMin());
+        view.setLimitMax(getHolder().getLimitMax());
     }
 
     @Override
@@ -252,8 +242,8 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         {
             final ProgressView view = (ProgressView) child;
 
-            synchronizeChildProgress(view);
             synchronizeChildBound(view);
+            synchronizeChildProgress(view);
             getListProgressView().add(view);
         }
     }
