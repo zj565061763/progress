@@ -10,18 +10,25 @@ public interface ProgressView
     int getProgress();
 
     /**
-     * 返回最小进度，默认0
-     *
-     * @return
-     */
-    int getMinProgress();
-
-    /**
      * 返回最大进度，默认100
      *
      * @return
      */
-    int getMaxProgress();
+    int getMax();
+
+    /**
+     * 返回限制的最小进度值，默认为0
+     *
+     * @return
+     */
+    int getLimitMin();
+
+    /**
+     * 返回限制的最大进度值，即和Max一致
+     *
+     * @return
+     */
+    int getLimitMax();
 
     /**
      * 返回进度百分比[0-1]
@@ -39,16 +46,23 @@ public interface ProgressView
     boolean setProgress(int progress);
 
     /**
-     * 设置最小进度，默认0
-     *
-     * @param progress
-     */
-    void setMinProgress(int progress);
-
-    /**
      * 设置最大进度，默认100
      *
-     * @param progress
+     * @param max
      */
-    void setMaxProgress(int progress);
+    void setMax(int max);
+
+    /**
+     * 限制进度最小值
+     *
+     * @param limit null-表示不限制，即默认值0
+     */
+    void setLimitMin(Integer limit);
+
+    /**
+     * 限制进度最大值
+     *
+     * @param limit null-表示不限制，即和Max一致
+     */
+    void setLimitMax(Integer limit);
 }

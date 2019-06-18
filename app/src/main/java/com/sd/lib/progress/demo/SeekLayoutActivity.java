@@ -21,8 +21,13 @@ public class SeekLayoutActivity extends AppCompatActivity
         mSeekLayout = findViewById(R.id.seek_layout);
 
         mSeekLayout.setOrientation(SeekLayout.Orientation.Horizontal);
-        mSeekLayout.setMaxProgress(90);
-        mSeekLayout.setMinProgress(10);
+
+        mSeekLayout.setProgress(50);
+        mSeekLayout.setMax(100);
+
+        mSeekLayout.setLimitMin(10);
+        mSeekLayout.setLimitMax(90);
+
         mSeekLayout.setOnProgressChangeCallback(new SeekLayout.OnProgressChangeCallback()
         {
             @Override

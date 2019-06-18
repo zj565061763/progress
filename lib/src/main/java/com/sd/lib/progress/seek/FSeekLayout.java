@@ -64,15 +64,21 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public int getMinProgress()
+    public int getMax()
     {
-        return getHolder().getMinProgress();
+        return getHolder().getMax();
     }
 
     @Override
-    public int getMaxProgress()
+    public int getLimitMin()
     {
-        return getHolder().getMaxProgress();
+        return getHolder().getLimitMin();
+    }
+
+    @Override
+    public int getLimitMax()
+    {
+        return getHolder().getLimitMax();
     }
 
     @Override
@@ -91,17 +97,24 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public void setMinProgress(int progress)
+    public void setMax(int max)
     {
-        getHolder().setMinProgress(progress);
-        synchronizeMinProgress(progress);
+        getHolder().setMax(max);
+        synchronizeProgress();
     }
 
     @Override
-    public void setMaxProgress(int progress)
+    public void setLimitMin(Integer limit)
     {
-        getHolder().setMaxProgress(progress);
-        synchronizeMaxProgress(progress);
+        getHolder().setLimitMin(limit);
+        synchronizeProgress();
+    }
+
+    @Override
+    public void setLimitMax(Integer limit)
+    {
+        getHolder().setLimitMax(limit);
+        synchronizeProgress();
     }
 
     @Override
@@ -143,43 +156,19 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
     private void notifyProgressChanged(boolean isTouch)
     {
-        final int progress = getHolder().getProgress();
-
-        synchronizeProgress(progress);
+        synchronizeProgress();
         layoutThumb();
         if (mOnProgressChangeCallback != null)
-            mOnProgressChangeCallback.onProgressChanged(this, progress, isTouch);
+            mOnProgressChangeCallback.onProgressChanged(this, getHolder().getProgress(), isTouch);
     }
 
-    private void synchronizeProgress(int progress)
+    private void synchronizeProgress()
     {
         if (mListProgressView != null)
         {
             for (ProgressView item : mListProgressView)
             {
-                item.setProgress(progress);
-            }
-        }
-    }
-
-    private void synchronizeMinProgress(int progress)
-    {
-        if (mListProgressView != null)
-        {
-            for (ProgressView item : mListProgressView)
-            {
-                item.setMinProgress(progress);
-            }
-        }
-    }
-
-    private void synchronizeMaxProgress(int progress)
-    {
-        if (mListProgressView != null)
-        {
-            for (ProgressView item : mListProgressView)
-            {
-                item.setMaxProgress(progress);
+                getHolder().synchronizeView(item);
             }
         }
     }
@@ -223,11 +212,9 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
         if (child instanceof ProgressView)
         {
-            final ProgressView progressView = (ProgressView) child;
-            progressView.setProgress(getProgress());
-            progressView.setMinProgress(getMinProgress());
-            progressView.setMaxProgress(getMaxProgress());
-            getListProgressView().add(progressView);
+            final ProgressView view = (ProgressView) child;
+            getHolder().synchronizeView(view);
+            getListProgressView().add(view);
         }
     }
 
@@ -316,7 +303,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
                 }
             }
 
-            final int progress = (int) (percent * getHolder().getMaxProgress());
+            final int progress = (int) (percent * getHolder().getMax());
             return progress;
         }
 

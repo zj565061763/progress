@@ -52,7 +52,7 @@ public class ProgressBarActivity extends AppCompatActivity
     private void startAnimator()
     {
         cancelAnimator();
-        getAnimator().setIntValues(mProgressBar.getMinProgress(), mProgressBar.getMaxProgress());
+        getAnimator().setIntValues(mProgressBar.getLimitMin(), mProgressBar.getMax());
         getAnimator().start();
     }
 

@@ -2,9 +2,13 @@ package com.sd.lib.progress;
 
 public abstract class ProgressHolder implements ProgressView
 {
-    private int mMinProgress = 0;
-    private int mMaxProgress = 100;
     private int mProgress = 0;
+    // 暂时不对外开放修改
+    private final int mMin = 0;
+    private int mMax = 100;
+
+    private Integer mLimitMin = null;
+    private Integer mLimitMax = null;
 
     @Override
     public int getProgress()
@@ -13,34 +17,43 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
-    public int getMinProgress()
+    public int getMax()
     {
-        return mMinProgress;
+        return mMax;
     }
 
     @Override
-    public int getMaxProgress()
+    public int getLimitMin()
     {
-        return mMaxProgress;
+        return mLimitMin == null ? mMin : mLimitMin;
+    }
+
+    @Override
+    public int getLimitMax()
+    {
+        return mLimitMax == null ? mMax : mLimitMax;
     }
 
     @Override
     public float getProgressPercent()
     {
-        if (mMaxProgress <= 0)
-            return 0.0f;
+        if (mMax < mMin)
+            throw new RuntimeException("max < min max:" + mMax + " min:" + mMin);
 
-        return (float) mProgress / mMaxProgress;
+        return mMax == mMin ? 0.0f : (float) mProgress / mMax;
     }
 
     @Override
     public boolean setProgress(int progress)
     {
-        if (progress < mMinProgress)
-            progress = mMinProgress;
+        final int limitMin = getLimitMin();
+        final int limitMax = getLimitMax();
 
-        if (progress > mMaxProgress)
-            progress = mMaxProgress;
+        if (progress < limitMin)
+            progress = limitMin;
+
+        if (progress > limitMax)
+            progress = limitMax;
 
         if (mProgress != progress)
         {
@@ -51,38 +64,79 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
-    public void setMinProgress(int progress)
+    public void setMax(int max)
     {
-        if (progress < 0)
-            progress = 0;
+        if (max < mMin)
+            max = mMin;
 
-        if (mMinProgress != progress)
+        if (mMax != max)
         {
-            mMinProgress = progress;
-            checkProgressBound();
+            mMax = max;
+            checkLimitBound();
 
             if (setProgress(mProgress))
                 onProgressFixIntoRange();
         }
-    }
-
-    private void checkProgressBound()
-    {
-        if (mMinProgress > mMaxProgress)
-            throw new RuntimeException("mMinProgress > mMaxProgress min:" + mMinProgress + " max:" + mMaxProgress);
     }
 
     @Override
-    public void setMaxProgress(int progress)
+    public void setLimitMin(Integer limit)
     {
-        if (mMaxProgress != progress)
+        if (mLimitMin != limit)
         {
-            mMaxProgress = progress;
-            checkProgressBound();
+            mLimitMin = limit;
+            checkLimitBound();
 
             if (setProgress(mProgress))
                 onProgressFixIntoRange();
         }
+    }
+
+    @Override
+    public void setLimitMax(Integer limit)
+    {
+        if (mLimitMax != limit)
+        {
+            mLimitMax = limit;
+            checkLimitBound();
+
+            if (setProgress(mProgress))
+                onProgressFixIntoRange();
+        }
+    }
+
+    private void checkLimitBound()
+    {
+        if (mLimitMin != null)
+            checkBound(mLimitMin);
+
+        if (mLimitMax != null)
+            checkBound(mLimitMax);
+
+        if (mLimitMin != null && mLimitMax != null)
+        {
+            if (mLimitMin > mLimitMax)
+                throw new RuntimeException("limitMin > limitMax min:" + mLimitMin + " max:" + mLimitMax);
+        }
+    }
+
+    private void checkBound(int value)
+    {
+        if (value < mMin || value > mMax)
+            throw new RuntimeException("value out of range (" + mMin + "," + mMax + ")");
+    }
+
+    /**
+     * 把Holder的值同步给View
+     *
+     * @param view
+     */
+    public void synchronizeView(ProgressView view)
+    {
+        view.setProgress(mProgress);
+        view.setMax(mMax);
+        view.setLimitMin(mLimitMin);
+        view.setLimitMax(mLimitMax);
     }
 
     protected abstract void onProgressFixIntoRange();
