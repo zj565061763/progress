@@ -20,6 +20,12 @@ public class ProgressBarActivity extends AppCompatActivity
         mProgressBar.setOrientation(FProgressBar.Orientation.Horizontal);
         mProgressBar.setProgressImage(R.drawable.timg);
         mProgressBar.setReverseProgress(false);
+
+        mProgressBar.setProgress(50);
+        mProgressBar.setMax(100);
+
+        mProgressBar.setLimitMin(10);
+        mProgressBar.setLimitMax(90);
     }
 
     @Override
@@ -52,7 +58,7 @@ public class ProgressBarActivity extends AppCompatActivity
     private void startAnimator()
     {
         cancelAnimator();
-        getAnimator().setIntValues(mProgressBar.getLimitMin(), mProgressBar.getMax());
+        getAnimator().setIntValues(0, mProgressBar.getMax());
         getAnimator().start();
     }
 
