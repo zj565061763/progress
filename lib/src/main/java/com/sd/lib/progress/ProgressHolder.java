@@ -23,13 +23,13 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
-    public int getLimitMin()
+    public Integer getLimitMin()
     {
         return mLimitMin == null ? mMin : mLimitMin;
     }
 
     @Override
-    public int getLimitMax()
+    public Integer getLimitMax()
     {
         return mLimitMax == null ? mMax : mLimitMax;
     }
@@ -124,19 +124,6 @@ public abstract class ProgressHolder implements ProgressView
     {
         if (value < mMin || value > mMax)
             throw new RuntimeException("value out of range (" + mMin + "," + mMax + ")");
-    }
-
-    /**
-     * 把Holder的值同步给View
-     *
-     * @param view
-     */
-    public void synchronizeView(ProgressView view)
-    {
-        view.setProgress(mProgress);
-        view.setMax(mMax);
-        view.setLimitMin(mLimitMin);
-        view.setLimitMax(mLimitMax);
     }
 
     protected abstract void onProgressFixIntoRange();

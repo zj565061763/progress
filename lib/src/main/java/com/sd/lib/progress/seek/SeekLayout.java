@@ -32,6 +32,20 @@ public interface SeekLayout extends ProgressView
      */
     void setTouchable(boolean isTouchable);
 
+    /**
+     * 设置是否同步进度给Child，默认true-同步
+     *
+     * @param synchronize
+     */
+    void setSynchronizeProgress(boolean synchronize);
+
+    /**
+     * 设置是否同步进度边界给Child，默认true-同步
+     *
+     * @param synchronize
+     */
+    void setSynchronizeBound(boolean synchronize);
+
     interface OnProgressChangeCallback
     {
         /**
