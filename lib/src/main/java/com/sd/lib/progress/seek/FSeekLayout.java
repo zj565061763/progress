@@ -182,21 +182,8 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
     private void layoutThumb()
     {
-        if (mOrientation == null)
-            throw new RuntimeException("mOrientation is null");
-
         if (mOrientationHandler.check())
-        {
-            if (mOrientation == Orientation.Horizontal)
-            {
-                final int l = mOrientationHandler.getLayoutStart();
-                mThumbView.layout(l, mThumbView.getTop(), l + mThumbView.getMeasuredWidth(), mThumbView.getBottom());
-            } else
-            {
-                final int t = mOrientationHandler.getLayoutStart();
-                mThumbView.layout(mThumbView.getLeft(), t, mThumbView.getRight(), t + mThumbView.getMeasuredHeight());
-            }
-        }
+            mOrientationHandler.layoutThumb();
     }
 
     @Override
@@ -260,10 +247,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
             return true;
         }
 
-        public int getLayoutStart()
-        {
-            return (int) (getStartBound() + getAvailableSize() * getProgressPercent());
-        }
+        public abstract void layoutThumb();
 
         // 可用的大小
         public int getAvailableSize()
@@ -303,6 +287,9 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
                 }
             }
 
+            if (mOrientation == Orientation.Vertical)
+                percent = 1.0f - percent;
+
             final int progress = (int) (percent * getHolder().getMax());
             return progress;
         }
@@ -337,6 +324,14 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
     private class HorizontalHandler extends OrientationHandler
     {
+        @Override
+        public void layoutThumb()
+        {
+            final float percent = getProgressPercent();
+            final int left = (int) (getStartBound() + getAvailableSize() * percent);
+            mThumbView.layout(left, mThumbView.getTop(), left + mThumbView.getMeasuredWidth(), mThumbView.getBottom());
+        }
+
         @Override
         public int getTotalSize()
         {
@@ -382,6 +377,14 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
     private class VerticalHandler extends OrientationHandler
     {
+        @Override
+        public void layoutThumb()
+        {
+            final float percent = 1.0f - getProgressPercent();
+            final int top = (int) (getStartBound() + getAvailableSize() * percent);
+            mThumbView.layout(mThumbView.getLeft(), top, mThumbView.getRight(), top + mThumbView.getHeight());
+        }
+
         @Override
         public int getTotalSize()
         {
