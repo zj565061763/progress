@@ -175,7 +175,10 @@ public class FProgressBar extends View implements ProgressView
         if (mProgressImage != resId)
         {
             mProgressImage = resId;
+
             mProgressBitmap = null;
+            mProgressColor = 0;
+
             invalidate();
         }
     }
@@ -190,7 +193,10 @@ public class FProgressBar extends View implements ProgressView
         if (mProgressColor != color)
         {
             mProgressColor = color;
+
             mProgressBitmap = null;
+            mProgressImage = 0;
+
             invalidate();
         }
     }
