@@ -3,6 +3,7 @@ package com.sd.lib.progress.demo;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.sd.lib.progress.pgb.FProgressBar;
 
@@ -26,13 +27,15 @@ public class ProgressBarActivity extends AppCompatActivity
 
         mProgressBar.setLimitMin(10);
         mProgressBar.setLimitMax(90);
-    }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        startAnimator();
+        mProgressBar.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startAnimator();
+            }
+        });
     }
 
     private ValueAnimator mAnimator;
