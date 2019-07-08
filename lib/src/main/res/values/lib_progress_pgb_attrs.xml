@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LibProgressPgb">
+        <!-- 进度图片 -->
+        <attr name="fProgressImage" format="reference" />
+        <!-- 进度颜色 -->
+        <attr name="fProgressColor" format="color" />
+    </declare-styleable>
+
+</resources>

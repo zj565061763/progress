@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.sd.lib.progress.ProgressHolder;
 import com.sd.lib.progress.ProgressView;
+import com.sd.lib.progress.R;
 
 public class FProgressBar extends View implements ProgressView
 {
@@ -43,6 +44,24 @@ public class FProgressBar extends View implements ProgressView
         final TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
         final int colorAccent = array.getColor(0, Color.RED);
         setProgressColor(colorAccent);
+
+        if (attrs != null)
+        {
+            final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LibProgressPgb);
+            if (a.hasValue(R.styleable.LibProgressPgb_fProgressColor))
+            {
+                final int progressColor = a.getColor(R.styleable.LibProgressPgb_fProgressColor, 0);
+                setProgressColor(progressColor);
+            }
+
+            if (a.hasValue(R.styleable.LibProgressPgb_fProgressImage))
+            {
+                final int progressImage = a.getResourceId(R.styleable.LibProgressPgb_fProgressImage, 0);
+                setProgressImage(progressImage);
+            }
+
+            a.recycle();
+        }
     }
 
     private ProgressHolder getHolder()
