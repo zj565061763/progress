@@ -3,9 +3,9 @@
 
     <declare-styleable name="LibProgressPgb">
         <!-- 进度图片 -->
-        <attr name="fProgressImage" format="reference" />
+        <attr name="pgbProgressImage" format="reference" />
         <!-- 进度颜色 -->
-        <attr name="fProgressColor" format="color" />
+        <attr name="pgbProgressColor" format="color" />
     </declare-styleable>
 
 </resources>

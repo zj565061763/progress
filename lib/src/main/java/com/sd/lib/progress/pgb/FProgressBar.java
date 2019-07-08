@@ -45,15 +45,15 @@ public class FProgressBar extends View implements ProgressView
         if (attrs != null)
         {
             final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LibProgressPgb);
-            if (a.hasValue(R.styleable.LibProgressPgb_fProgressColor))
+            if (a.hasValue(R.styleable.LibProgressPgb_pgbProgressColor))
             {
-                final int progressColor = a.getColor(R.styleable.LibProgressPgb_fProgressColor, 0);
+                final int progressColor = a.getColor(R.styleable.LibProgressPgb_pgbProgressColor, 0);
                 setProgressColor(progressColor);
             }
 
-            if (a.hasValue(R.styleable.LibProgressPgb_fProgressImage))
+            if (a.hasValue(R.styleable.LibProgressPgb_pgbProgressImage))
             {
-                final int progressImage = a.getResourceId(R.styleable.LibProgressPgb_fProgressImage, 0);
+                final int progressImage = a.getResourceId(R.styleable.LibProgressPgb_pgbProgressImage, 0);
                 setProgressImage(progressImage);
             }
 
