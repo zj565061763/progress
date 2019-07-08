@@ -8,7 +8,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 20190708
-        versionName "1.0.0-beta5"
+        versionName "1.0.0-beta6"
     }
 
     buildTypes {
