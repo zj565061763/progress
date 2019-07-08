@@ -19,7 +19,6 @@ public class ProgressBarActivity extends AppCompatActivity
         mProgressBar = findViewById(R.id.progress_bar);
 
         mProgressBar.setOrientation(FProgressBar.Orientation.Horizontal);
-        mProgressBar.setProgressImage(R.drawable.timg);
         mProgressBar.setReverseProgress(false);
 
         mProgressBar.setProgress(50);
