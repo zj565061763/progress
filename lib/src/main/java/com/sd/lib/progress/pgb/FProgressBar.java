@@ -3,7 +3,6 @@ package com.sd.lib.progress.pgb;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
@@ -39,11 +38,9 @@ public class FProgressBar extends View implements ProgressView
         mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         if (getBackground() == null)
-            setBackgroundColor(Color.parseColor("#999999"));
+            setBackgroundColor(getResources().getColor(R.color.lib_progress_pgb_background));
 
-        final TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
-        final int colorAccent = array.getColor(0, Color.RED);
-        setProgressColor(colorAccent);
+        setProgressColor(getResources().getColor(R.color.lib_progress_pgb_progress));
 
         if (attrs != null)
         {

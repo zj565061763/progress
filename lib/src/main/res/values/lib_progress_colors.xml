@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 默认进度条背景颜色 -->
+    <color name="lib_progress_pgb_background">#999999</color>
+    <!-- 默认进度条进度颜色 -->
+    <color name="lib_progress_pgb_progress">#FF0000</color>
+
+</resources>
