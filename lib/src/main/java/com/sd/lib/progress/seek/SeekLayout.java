@@ -19,6 +19,13 @@ public interface SeekLayout extends ProgressView
     void setOnProgressChangeCallback(OnProgressChangeCallback callback);
 
     /**
+     * 设置触摸回调
+     *
+     * @param callback
+     */
+    void setOnTrackingTouchCallback(OnTrackingTouchCallback callback);
+
+    /**
      * 设置方向，默认{@link Orientation#Horizontal}
      *
      * @param orientation
@@ -49,6 +56,16 @@ public interface SeekLayout extends ProgressView
          * @param isTouch    true-拖动
          */
         void onProgressChanged(SeekLayout seekLayout, int progress, boolean isTouch);
+    }
+
+    /**
+     * 触摸回调
+     */
+    interface OnTrackingTouchCallback
+    {
+        void onStartTrackingTouch(SeekLayout seekLayout);
+
+        void onStopTrackingTouch(SeekLayout seekLayout);
     }
 
     enum Orientation

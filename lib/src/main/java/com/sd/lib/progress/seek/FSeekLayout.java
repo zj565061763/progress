@@ -27,6 +27,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     private List<ProgressView> mListProgressView;
 
     private OnProgressChangeCallback mOnProgressChangeCallback;
+    private OnTrackingTouchCallback mOnTrackingTouchCallback;
 
     private ProgressHolder mHolder;
 
@@ -129,6 +130,12 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     public void setOnProgressChangeCallback(OnProgressChangeCallback callback)
     {
         mOnProgressChangeCallback = callback;
+    }
+
+    @Override
+    public void setOnTrackingTouchCallback(OnTrackingTouchCallback callback)
+    {
+        mOnTrackingTouchCallback = callback;
     }
 
     @Override
@@ -355,10 +362,23 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         {
             if (mIsTouchable)
             {
+                final int action = event.getAction();
+                if (action == MotionEvent.ACTION_DOWN)
+                {
+                    if (mOnTrackingTouchCallback != null)
+                        mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
+                }
+
                 final int value = getTouchEventValue(event) - getThumbSize() / 2;
                 final int progress = getBoundProgress(value);
                 if (getHolder().setProgress(progress))
                     notifyProgressChanged(true);
+
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
+                {
+                    if (mOnTrackingTouchCallback != null)
+                        mOnTrackingTouchCallback.onStopTrackingTouch(FSeekLayout.this);
+                }
             }
         }
 
