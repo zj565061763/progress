@@ -34,5 +34,20 @@ public class SeekBarActivity extends AppCompatActivity
                 Log.i(TAG, "onProgressChanged: " + progress + " isTouch:" + isTouch);
             }
         });
+
+        mSeekLayout.setOnTrackingTouchCallback(new SeekLayout.OnTrackingTouchCallback()
+        {
+            @Override
+            public void onStartTrackingTouch(SeekLayout seekLayout)
+            {
+                Log.i(TAG, "onStartTrackingTouch: " + seekLayout.getProgress());
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekLayout seekLayout)
+            {
+                Log.i(TAG, "onStopTrackingTouch: " + seekLayout.getProgress());
+            }
+        });
     }
 }
