@@ -63,9 +63,20 @@ public interface SeekLayout extends ProgressView
      */
     interface OnTrackingTouchCallback
     {
+        /**
+         * 开始触摸
+         *
+         * @param seekLayout
+         */
         void onStartTrackingTouch(SeekLayout seekLayout);
 
-        void onStopTrackingTouch(SeekLayout seekLayout);
+        /**
+         * 停止触摸
+         *
+         * @param seekLayout
+         * @param hasActionMove 开始到停止的过程中是否触发过{@link android.view.MotionEvent#ACTION_MOVE}，true-触发过
+         */
+        void onStopTrackingTouch(SeekLayout seekLayout, boolean hasActionMove);
     }
 
     enum Orientation

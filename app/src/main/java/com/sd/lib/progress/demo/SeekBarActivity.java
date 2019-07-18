@@ -44,9 +44,9 @@ public class SeekBarActivity extends AppCompatActivity
             }
 
             @Override
-            public void onStopTrackingTouch(SeekLayout seekLayout)
+            public void onStopTrackingTouch(SeekLayout seekLayout, boolean hasActionMove)
             {
-                Log.i(TAG, "onStopTrackingTouch: " + seekLayout.getProgress());
+                Log.i(TAG, "onStopTrackingTouch: " + seekLayout.getProgress() + " hasActionMove:" + hasActionMove);
             }
         });
     }
