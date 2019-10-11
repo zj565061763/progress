@@ -64,7 +64,7 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
-    public void setMax(int max)
+    public boolean setMax(int max)
     {
         if (max < mMin)
             max = mMin;
@@ -76,7 +76,9 @@ public abstract class ProgressHolder implements ProgressView
 
             if (setProgress(mProgress))
                 onProgressFixIntoRange();
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -117,9 +117,12 @@ public class FProgressBar extends View implements ProgressView
     }
 
     @Override
-    public void setMax(int max)
+    public boolean setMax(int max)
     {
-        getHolder().setMax(max);
+        final boolean result = getHolder().setMax(max);
+        if (result)
+            invalidate();
+        return result;
     }
 
     @Override

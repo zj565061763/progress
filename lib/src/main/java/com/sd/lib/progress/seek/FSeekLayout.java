@@ -18,14 +18,21 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 {
     private View mThumbView;
 
+    // 可以拖动的方向
     private Orientation mOrientation;
     private OrientationHandler mOrientationHandler;
 
+    // 是否可以触摸改变进度
     private boolean mIsTouchable = true;
 
+    // 是否同步进度给子view
     private boolean mSynchronizeProgress = true;
+    // 保存所有子view
     private List<ProgressView> mListProgressView;
 
+    /**
+     * 在一次的手指接触到离开的过程中是否触发过{@link MotionEvent#ACTION_MOVE}
+     */
     private boolean mHasActionMove = false;
 
     private OnProgressChangeCallback mOnProgressChangeCallback;
@@ -102,10 +109,14 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public void setMax(int max)
+    public boolean setMax(int max)
     {
-        getHolder().setMax(max);
+        final boolean result = getHolder().setMax(max);
+        if (result)
+            layoutThumb();
+
         synchronizeChildrenBound();
+        return result;
     }
 
     @Override

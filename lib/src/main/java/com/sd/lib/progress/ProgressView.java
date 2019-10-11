@@ -49,8 +49,9 @@ public interface ProgressView
      * 设置最大进度，默认100
      *
      * @param max
+     * @return true-最大值发生变化
      */
-    void setMax(int max);
+    boolean setMax(int max);
 
     /**
      * 限制进度最小值
