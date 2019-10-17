@@ -53,4 +53,23 @@ public interface ProgressView
      * @return true-进度发生变化
      */
     boolean setProgress(int progress);
+
+    /**
+     * 设置进度拦截器
+     *
+     * @param progressInterceptor
+     */
+    void setProgressInterceptor(ProgressInterceptor progressInterceptor);
+
+    interface ProgressInterceptor
+    {
+        /**
+         * 是否拦截进度设置
+         *
+         * @param progressView
+         * @param futureProgress 即将被设置的进度
+         * @return true-拦截掉
+         */
+        boolean interceptProgress(ProgressView progressView, int futureProgress);
+    }
 }

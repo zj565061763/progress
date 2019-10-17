@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.sd.lib.progress.R;
 import com.sd.lib.progress.core.ProgressBar;
+import com.sd.lib.progress.core.ProgressView;
 import com.sd.lib.progress.core.holder.ProgressBarHolder;
 
 public class FProgressBar extends View implements ProgressBar
@@ -67,6 +68,12 @@ public class FProgressBar extends View implements ProgressBar
         {
             mHolder = new ProgressBarHolder()
             {
+                @Override
+                protected ProgressView getProgressView()
+                {
+                    return FProgressBar.this;
+                }
+
                 @Override
                 protected void onProgressFixIntoRange()
                 {
@@ -138,6 +145,12 @@ public class FProgressBar extends View implements ProgressBar
         if (result)
             invalidate();
         return result;
+    }
+
+    @Override
+    public void setProgressInterceptor(ProgressInterceptor progressInterceptor)
+    {
+        getHolder().setProgressInterceptor(progressInterceptor);
     }
 
     @Override

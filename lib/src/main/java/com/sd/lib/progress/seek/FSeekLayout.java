@@ -7,9 +7,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.sd.lib.progress.core.holder.ProgressHolder;
-import com.sd.lib.progress.core.ProgressView;
 import com.sd.lib.progress.R;
+import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.holder.ProgressHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +52,12 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         {
             mHolder = new ProgressHolder()
             {
+                @Override
+                protected ProgressView getProgressView()
+                {
+                    return FSeekLayout.this;
+                }
+
                 @Override
                 protected void onProgressFixIntoRange()
                 {
@@ -122,6 +128,12 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         if (result)
             notifyProgressChanged(false);
         return result;
+    }
+
+    @Override
+    public void setProgressInterceptor(ProgressInterceptor progressInterceptor)
+    {
+        getHolder().setProgressInterceptor(progressInterceptor);
     }
 
     @Override

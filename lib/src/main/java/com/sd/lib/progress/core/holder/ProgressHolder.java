@@ -8,6 +8,7 @@ public abstract class ProgressHolder implements ProgressView
     private int mMax = 100;
 
     private int mProgress = 0;
+    private ProgressInterceptor mProgressInterceptor;
 
     @Override
     public int getMax()
@@ -88,11 +89,25 @@ public abstract class ProgressHolder implements ProgressView
 
         if (mProgress != progress)
         {
+            if (mProgressInterceptor != null)
+            {
+                if (mProgressInterceptor.interceptProgress(getProgressView(), progress))
+                    return false;
+            }
+
             mProgress = progress;
             return true;
         }
         return false;
     }
+
+    @Override
+    public void setProgressInterceptor(ProgressInterceptor progressInterceptor)
+    {
+        mProgressInterceptor = progressInterceptor;
+    }
+
+    protected abstract ProgressView getProgressView();
 
     protected abstract void onProgressFixIntoRange();
 }
