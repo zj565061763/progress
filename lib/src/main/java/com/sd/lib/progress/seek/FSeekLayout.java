@@ -100,6 +100,12 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
+    public int getPercentProgress(float percent)
+    {
+        return getHolder().getPercentProgress(percent);
+    }
+
+    @Override
     public boolean setMax(int max)
     {
         final boolean result = getHolder().setMax(max);
@@ -330,7 +336,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
             return getTotalSize() - getThumbSize() - getPaddingEnd() - getMarginEnd();
         }
 
-        public int getBoundProgress(int bound)
+        public float getBoundPercent(int bound)
         {
             float percent = 0.0f;
 
@@ -355,8 +361,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
             if (mOrientation == Orientation.Vertical)
                 percent = 1.0f - percent;
 
-            final int progress = (int) (percent * getHolder().getMax());
-            return progress;
+            return percent;
         }
 
         // 布局总的大小
@@ -389,7 +394,9 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
                 }
 
                 final int value = getTouchEventValue(event) - getThumbSize() / 2;
-                final int progress = getBoundProgress(value);
+                final float percent = getBoundPercent(value);
+                final int progress = getPercentProgress(percent);
+
                 if (getHolder().setProgress(progress))
                     notifyProgressChanged(true);
 

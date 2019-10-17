@@ -109,6 +109,12 @@ public class FProgressBar extends View implements ProgressBar
     }
 
     @Override
+    public int getPercentProgress(float percent)
+    {
+        return getHolder().getPercentProgress(percent);
+    }
+
+    @Override
     public int getStartProgress()
     {
         return getHolder().getStartProgress();

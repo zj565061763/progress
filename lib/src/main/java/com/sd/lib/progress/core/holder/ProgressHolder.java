@@ -42,6 +42,16 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
+    public int getPercentProgress(float percent)
+    {
+        if (percent <= 0)
+            return mMin;
+
+        final int progress = (int) (percent * (mMax - mMin)) + mMin;
+        return progress;
+    }
+
+    @Override
     public boolean setMax(int max)
     {
         if (max < mMin)

@@ -31,6 +31,14 @@ public interface ProgressView
     float getProgressPercent();
 
     /**
+     * 返回百分比对应的进度值
+     *
+     * @param percent [0-1]
+     * @return
+     */
+    int getPercentProgress(float percent);
+
+    /**
      * 设置最大进度，默认100
      *
      * @param max
