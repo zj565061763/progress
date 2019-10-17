@@ -1,4 +1,4 @@
-package com.sd.lib.progress;
+package com.sd.lib.progress.core;
 
 public interface ProgressView
 {

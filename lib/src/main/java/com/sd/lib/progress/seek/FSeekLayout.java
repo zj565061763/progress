@@ -7,8 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.sd.lib.progress.ProgressHolder;
-import com.sd.lib.progress.ProgressView;
+import com.sd.lib.progress.core.ProgressHolder;
+import com.sd.lib.progress.core.ProgressView;
 import com.sd.lib.progress.R;
 
 import java.util.ArrayList;

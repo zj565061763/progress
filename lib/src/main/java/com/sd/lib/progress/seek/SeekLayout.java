@@ -1,6 +1,6 @@
 package com.sd.lib.progress.seek;
 
-import com.sd.lib.progress.ProgressView;
+import com.sd.lib.progress.core.ProgressView;
 
 public interface SeekLayout extends ProgressView
 {
