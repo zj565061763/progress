@@ -82,18 +82,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public Integer getLimitMin()
-    {
-        return getHolder().getLimitMin();
-    }
-
-    @Override
-    public Integer getLimitMax()
-    {
-        return getHolder().getLimitMax();
-    }
-
-    @Override
     public float getProgressPercent()
     {
         return getHolder().getProgressPercent();
@@ -117,20 +105,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
 
         synchronizeChildrenBound();
         return result;
-    }
-
-    @Override
-    public void setLimitMin(Integer limit)
-    {
-        getHolder().setLimitMin(limit);
-        synchronizeChildrenBound();
-    }
-
-    @Override
-    public void setLimitMax(Integer limit)
-    {
-        getHolder().setLimitMax(limit);
-        synchronizeChildrenBound();
     }
 
     @Override
@@ -230,8 +204,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     private void synchronizeChildBound(ProgressView view)
     {
         view.setMax(getHolder().getMax());
-        view.setLimitMin(getHolder().getLimitMin());
-        view.setLimitMax(getHolder().getLimitMax());
     }
 
     @Override

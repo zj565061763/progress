@@ -25,9 +25,6 @@ public class SeekLayoutActivity extends AppCompatActivity
         mSeekLayout.setProgress(50);
         mSeekLayout.setMax(100);
 
-        mSeekLayout.setLimitMin(10);
-        mSeekLayout.setLimitMax(90);
-
         mSeekLayout.setOnProgressChangeCallback(new SeekLayout.OnProgressChangeCallback()
         {
             @Override

@@ -7,9 +7,6 @@ public abstract class ProgressHolder implements ProgressView
     private final int mMin = 0;
     private int mMax = 100;
 
-    private Integer mLimitMin = null;
-    private Integer mLimitMax = null;
-
     @Override
     public int getProgress()
     {
@@ -23,31 +20,23 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
-    public Integer getLimitMin()
-    {
-        return mLimitMin == null ? mMin : mLimitMin;
-    }
-
-    @Override
-    public Integer getLimitMax()
-    {
-        return mLimitMax == null ? mMax : mLimitMax;
-    }
-
-    @Override
     public float getProgressPercent()
     {
         if (mMax < mMin)
             throw new RuntimeException("max < min max:" + mMax + " min:" + mMin);
 
-        return mMax == mMin ? 0.0f : (float) mProgress / mMax;
+        if (mMax == mMin)
+            return 0.0f;
+
+        final int total = mMax - mMin;
+        return (float) mProgress / total;
     }
 
     @Override
     public boolean setProgress(int progress)
     {
-        final int limitMin = getLimitMin();
-        final int limitMax = getLimitMax();
+        final int limitMin = mMin;
+        final int limitMax = mMax;
 
         if (progress < limitMin)
             progress = limitMin;
@@ -72,60 +61,12 @@ public abstract class ProgressHolder implements ProgressView
         if (mMax != max)
         {
             mMax = max;
-            checkLimitBound();
 
             if (setProgress(mProgress))
                 onProgressFixIntoRange();
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void setLimitMin(Integer limit)
-    {
-        if (mLimitMin != limit)
-        {
-            mLimitMin = limit;
-            checkLimitBound();
-
-            if (setProgress(mProgress))
-                onProgressFixIntoRange();
-        }
-    }
-
-    @Override
-    public void setLimitMax(Integer limit)
-    {
-        if (mLimitMax != limit)
-        {
-            mLimitMax = limit;
-            checkLimitBound();
-
-            if (setProgress(mProgress))
-                onProgressFixIntoRange();
-        }
-    }
-
-    private void checkLimitBound()
-    {
-        if (mLimitMin != null)
-            checkBound(mLimitMin);
-
-        if (mLimitMax != null)
-            checkBound(mLimitMax);
-
-        if (mLimitMin != null && mLimitMax != null)
-        {
-            if (mLimitMin > mLimitMax)
-                throw new RuntimeException("limitMin > limitMax min:" + mLimitMin + " max:" + mLimitMax);
-        }
-    }
-
-    private void checkBound(int value)
-    {
-        if (value < mMin || value > mMax)
-            throw new RuntimeException("value out of range (" + mMin + "," + mMax + ")");
     }
 
     protected abstract void onProgressFixIntoRange();

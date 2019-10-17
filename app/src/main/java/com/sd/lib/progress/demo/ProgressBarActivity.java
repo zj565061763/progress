@@ -24,9 +24,6 @@ public class ProgressBarActivity extends AppCompatActivity
         mProgressBar.setProgress(50);
         mProgressBar.setMax(100);
 
-        mProgressBar.setLimitMin(10);
-        mProgressBar.setLimitMax(90);
-
         mProgressBar.setOnClickListener(new View.OnClickListener()
         {
             @Override

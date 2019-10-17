@@ -90,18 +90,6 @@ public class FProgressBar extends View implements ProgressView
     }
 
     @Override
-    public Integer getLimitMin()
-    {
-        return getHolder().getLimitMin();
-    }
-
-    @Override
-    public Integer getLimitMax()
-    {
-        return getHolder().getLimitMax();
-    }
-
-    @Override
     public float getProgressPercent()
     {
         return getHolder().getProgressPercent();
@@ -123,18 +111,6 @@ public class FProgressBar extends View implements ProgressView
         if (result)
             invalidate();
         return result;
-    }
-
-    @Override
-    public void setLimitMin(Integer limit)
-    {
-        getHolder().setLimitMin(limit);
-    }
-
-    @Override
-    public void setLimitMax(Integer limit)
-    {
-        getHolder().setLimitMax(limit);
     }
 
     /**
