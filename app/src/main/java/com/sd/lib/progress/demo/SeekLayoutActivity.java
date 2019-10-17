@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.sd.lib.progress.core.interceptor.MinProgressInterceptor;
 import com.sd.lib.progress.seek.FSeekLayout;
 import com.sd.lib.progress.seek.SeekLayout;
 
@@ -24,6 +25,9 @@ public class SeekLayoutActivity extends AppCompatActivity
 
         mSeekLayout.setProgress(50);
         mSeekLayout.setMax(100);
+
+        // 设置进度拦截器，最小进度为20
+        mSeekLayout.setProgressInterceptor(new MinProgressInterceptor(20));
 
         mSeekLayout.setOnProgressChangeCallback(new SeekLayout.OnProgressChangeCallback()
         {
