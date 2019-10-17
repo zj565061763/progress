@@ -102,15 +102,6 @@ public class FProgressBar extends View implements ProgressView
     }
 
     @Override
-    public boolean setProgress(int progress)
-    {
-        final boolean result = getHolder().setProgress(progress);
-        if (result)
-            invalidate();
-        return result;
-    }
-
-    @Override
     public boolean setMax(int max)
     {
         final boolean result = getHolder().setMax(max);
@@ -123,6 +114,15 @@ public class FProgressBar extends View implements ProgressView
     public boolean setMin(int min)
     {
         final boolean result = getHolder().setMin(min);
+        if (result)
+            invalidate();
+        return result;
+    }
+
+    @Override
+    public boolean setProgress(int progress)
+    {
+        final boolean result = getHolder().setProgress(progress);
         if (result)
             invalidate();
         return result;

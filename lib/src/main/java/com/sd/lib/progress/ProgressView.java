@@ -31,14 +31,6 @@ public interface ProgressView
     float getProgressPercent();
 
     /**
-     * 设置进度
-     *
-     * @param progress
-     * @return true-进度发生变化
-     */
-    boolean setProgress(int progress);
-
-    /**
      * 设置最大进度，默认100
      *
      * @param max
@@ -53,4 +45,12 @@ public interface ProgressView
      * @return true-值发生变化
      */
     boolean setMin(int min);
+
+    /**
+     * 设置进度
+     *
+     * @param progress
+     * @return true-进度发生变化
+     */
+    boolean setProgress(int progress);
 }

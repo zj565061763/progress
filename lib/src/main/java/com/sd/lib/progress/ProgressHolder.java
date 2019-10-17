@@ -39,26 +39,6 @@ public abstract class ProgressHolder implements ProgressView
     }
 
     @Override
-    public boolean setProgress(int progress)
-    {
-        final int limitMin = mMin;
-        final int limitMax = mMax;
-
-        if (progress < limitMin)
-            progress = limitMin;
-
-        if (progress > limitMax)
-            progress = limitMax;
-
-        if (mProgress != progress)
-        {
-            mProgress = progress;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean setMax(int max)
     {
         if (max < mMin)
@@ -87,6 +67,26 @@ public abstract class ProgressHolder implements ProgressView
 
             if (setProgress(mProgress))
                 onProgressFixIntoRange();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean setProgress(int progress)
+    {
+        final int limitMin = mMin;
+        final int limitMax = mMax;
+
+        if (progress < limitMin)
+            progress = limitMin;
+
+        if (progress > limitMax)
+            progress = limitMax;
+
+        if (mProgress != progress)
+        {
+            mProgress = progress;
             return true;
         }
         return false;

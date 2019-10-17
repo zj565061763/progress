@@ -94,15 +94,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public boolean setProgress(int progress)
-    {
-        final boolean result = getHolder().setProgress(progress);
-        if (result)
-            notifyProgressChanged(false);
-        return result;
-    }
-
-    @Override
     public boolean setMax(int max)
     {
         final boolean result = getHolder().setMax(max);
@@ -121,6 +112,15 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
             layoutThumb();
 
         synchronizeChildrenBound();
+        return result;
+    }
+
+    @Override
+    public boolean setProgress(int progress)
+    {
+        final boolean result = getHolder().setProgress(progress);
+        if (result)
+            notifyProgressChanged(false);
         return result;
     }
 
