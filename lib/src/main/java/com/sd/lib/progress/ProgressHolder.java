@@ -34,7 +34,8 @@ public abstract class ProgressHolder implements ProgressView
             return 0.0f;
 
         final int total = mMax - mMin;
-        return (float) mProgress / total;
+        final int delta = mProgress - mMin;
+        return (float) delta / total;
     }
 
     @Override
