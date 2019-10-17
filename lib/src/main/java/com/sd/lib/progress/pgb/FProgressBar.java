@@ -8,11 +8,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.sd.lib.progress.core.holder.ProgressHolder;
-import com.sd.lib.progress.core.ProgressView;
 import com.sd.lib.progress.R;
+import com.sd.lib.progress.core.ProgressBar;
+import com.sd.lib.progress.core.holder.ProgressBarHolder;
 
-public class FProgressBar extends View implements ProgressView
+public class FProgressBar extends View implements ProgressBar
 {
     public enum Orientation
     {
@@ -29,7 +29,7 @@ public class FProgressBar extends View implements ProgressView
     private final Rect mProgressRect = new Rect();
     private boolean mReverseProgress = false;
 
-    private ProgressHolder mHolder;
+    private ProgressBarHolder mHolder;
 
     public FProgressBar(Context context, AttributeSet attrs)
     {
@@ -61,11 +61,11 @@ public class FProgressBar extends View implements ProgressView
         }
     }
 
-    private ProgressHolder getHolder()
+    private ProgressBarHolder getHolder()
     {
         if (mHolder == null)
         {
-            mHolder = new ProgressHolder()
+            mHolder = new ProgressBarHolder()
             {
                 @Override
                 protected void onProgressFixIntoRange()
@@ -102,6 +102,18 @@ public class FProgressBar extends View implements ProgressView
     }
 
     @Override
+    public int getStartProgress()
+    {
+        return getHolder().getStartProgress();
+    }
+
+    @Override
+    public float getStartProgressPercent()
+    {
+        return getHolder().getStartProgressPercent();
+    }
+
+    @Override
     public boolean setMax(int max)
     {
         final boolean result = getHolder().setMax(max);
@@ -123,6 +135,15 @@ public class FProgressBar extends View implements ProgressView
     public boolean setProgress(int progress)
     {
         final boolean result = getHolder().setProgress(progress);
+        if (result)
+            invalidate();
+        return result;
+    }
+
+    @Override
+    public boolean setStartProgress(Integer startProgress)
+    {
+        final boolean result = getHolder().setStartProgress(startProgress);
         if (result)
             invalidate();
         return result;
@@ -215,6 +236,9 @@ public class FProgressBar extends View implements ProgressView
 
     private Rect getProgressRect()
     {
+        final float progressPercent = getProgressPercent();
+        final float startProgressPercent = getStartProgressPercent();
+
         if (mOrientation == Orientation.Horizontal)
         {
             mProgressRect.top = 0;
@@ -222,13 +246,21 @@ public class FProgressBar extends View implements ProgressView
 
             if (mReverseProgress)
             {
-                mProgressRect.left = (int) (getWidth() * (1 - getProgressPercent()));
-                mProgressRect.right = getWidth();
+                mProgressRect.left = (int) (getWidth() * (1.0f - progressPercent));
+                mProgressRect.right = (int) (getWidth() * (1.0f - startProgressPercent));
             } else
             {
-                mProgressRect.left = 0;
-                mProgressRect.right = (int) (getWidth() * getProgressPercent());
+                mProgressRect.left = (int) (getWidth() * startProgressPercent);
+                mProgressRect.right = (int) (getWidth() * progressPercent);
             }
+
+            if (startProgressPercent > progressPercent)
+            {
+                final int temp = mProgressRect.left;
+                mProgressRect.left = mProgressRect.right;
+                mProgressRect.right = temp;
+            }
+
         } else
         {
             mProgressRect.left = 0;
@@ -236,12 +268,19 @@ public class FProgressBar extends View implements ProgressView
 
             if (mReverseProgress)
             {
-                mProgressRect.top = 0;
-                mProgressRect.bottom = (int) (getHeight() * getProgressPercent());
+                mProgressRect.top = (int) (getHeight() * startProgressPercent);
+                mProgressRect.bottom = (int) (getHeight() * progressPercent);
             } else
             {
-                mProgressRect.top = (int) (getHeight() * (1 - getProgressPercent()));
-                mProgressRect.bottom = getHeight();
+                mProgressRect.top = (int) (getHeight() * (1.0f - progressPercent));
+                mProgressRect.bottom = (int) (getHeight() * (1.0f - startProgressPercent));
+            }
+
+            if (startProgressPercent > progressPercent)
+            {
+                final int temp = mProgressRect.top;
+                mProgressRect.top = mProgressRect.bottom;
+                mProgressRect.bottom = temp;
             }
         }
         return mProgressRect;
