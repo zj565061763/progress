@@ -20,11 +20,9 @@ public class ProgressBarActivity extends AppCompatActivity
 
         mProgressBar.setOrientation(FProgressBar.Orientation.Horizontal);
         mProgressBar.setReverseProgress(false);
-
-        mProgressBar.setProgress(0);
         mProgressBar.setMax(100);
-        mProgressBar.setMin(-100);
-        mProgressBar.setStartProgress(0);
+        mProgressBar.setMin(0);
+        mProgressBar.setProgress(50);
 
         mProgressBar.setOnClickListener(new View.OnClickListener()
         {
