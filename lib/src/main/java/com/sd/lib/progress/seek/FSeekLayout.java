@@ -82,6 +82,12 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
+    public int getMin()
+    {
+        return getHolder().getMin();
+    }
+
+    @Override
     public float getProgressPercent()
     {
         return getHolder().getProgressPercent();
@@ -100,6 +106,17 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     public boolean setMax(int max)
     {
         final boolean result = getHolder().setMax(max);
+        if (result)
+            layoutThumb();
+
+        synchronizeChildrenBound();
+        return result;
+    }
+
+    @Override
+    public boolean setMin(int min)
+    {
+        final boolean result = getHolder().setMin(min);
         if (result)
             layoutThumb();
 
@@ -204,6 +221,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     private void synchronizeChildBound(ProgressView view)
     {
         view.setMax(getHolder().getMax());
+        view.setMin(getHolder().getMin());
     }
 
     @Override

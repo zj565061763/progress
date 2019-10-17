@@ -17,6 +17,13 @@ public interface ProgressView
     int getMax();
 
     /**
+     * 返回最小进度，默认100
+     *
+     * @return
+     */
+    int getMin();
+
+    /**
      * 返回进度百分比[0-1]
      *
      * @return
@@ -35,7 +42,15 @@ public interface ProgressView
      * 设置最大进度，默认100
      *
      * @param max
-     * @return true-最大值发生变化
+     * @return true-值发生变化
      */
     boolean setMax(int max);
+
+    /**
+     * 设置最小进度，默认0
+     *
+     * @param min
+     * @return true-值发生变化
+     */
+    boolean setMin(int min);
 }
