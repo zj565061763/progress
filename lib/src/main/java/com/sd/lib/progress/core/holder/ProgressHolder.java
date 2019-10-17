@@ -1,4 +1,6 @@
-package com.sd.lib.progress.core;
+package com.sd.lib.progress.core.holder;
+
+import com.sd.lib.progress.core.ProgressView;
 
 public abstract class ProgressHolder implements ProgressView
 {

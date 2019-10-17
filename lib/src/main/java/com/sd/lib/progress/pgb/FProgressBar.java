@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.sd.lib.progress.core.ProgressHolder;
+import com.sd.lib.progress.core.holder.ProgressHolder;
 import com.sd.lib.progress.core.ProgressView;
 import com.sd.lib.progress.R;
 
