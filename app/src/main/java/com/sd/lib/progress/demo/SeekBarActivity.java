@@ -24,7 +24,12 @@ public class SeekBarActivity extends AppCompatActivity
         mProgressBar = findViewById(R.id.progress_bar);
 
         mProgressBar.setOrientation(FProgressBar.Orientation.Vertical);
+        mProgressBar.setStartProgress(0);
+
         mSeekLayout.setOrientation(SeekLayout.Orientation.Vertical);
+        mSeekLayout.setMax(50);
+        mSeekLayout.setMin(-50);
+        mSeekLayout.setProgress(0);
 
         mSeekLayout.setOnProgressChangeCallback(new SeekLayout.OnProgressChangeCallback()
         {
