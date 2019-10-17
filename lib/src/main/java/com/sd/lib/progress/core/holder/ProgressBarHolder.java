@@ -1,6 +1,6 @@
 package com.sd.lib.progress.core.holder;
 
-import com.sd.lib.progress.core.ProgressBar;
+import com.sd.lib.progress.pgb.ProgressBar;
 
 public abstract class ProgressBarHolder extends ProgressHolder implements ProgressBar
 {

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.sd.lib.progress.R;
-import com.sd.lib.progress.core.ProgressBar;
 import com.sd.lib.progress.core.ProgressView;
 import com.sd.lib.progress.core.holder.ProgressBarHolder;
 

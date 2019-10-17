@@ -1,4 +1,6 @@
-package com.sd.lib.progress.core;
+package com.sd.lib.progress.pgb;
+
+import com.sd.lib.progress.core.ProgressView;
 
 public interface ProgressBar extends ProgressView
 {
