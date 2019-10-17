@@ -70,12 +70,6 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     }
 
     @Override
-    public int getProgress()
-    {
-        return getHolder().getProgress();
-    }
-
-    @Override
     public int getMax()
     {
         return getHolder().getMax();
@@ -85,6 +79,12 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     public int getMin()
     {
         return getHolder().getMin();
+    }
+
+    @Override
+    public int getProgress()
+    {
+        return getHolder().getProgress();
     }
 
     @Override

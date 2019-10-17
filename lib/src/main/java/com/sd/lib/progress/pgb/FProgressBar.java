@@ -78,12 +78,6 @@ public class FProgressBar extends View implements ProgressView
     }
 
     @Override
-    public int getProgress()
-    {
-        return getHolder().getProgress();
-    }
-
-    @Override
     public int getMax()
     {
         return getHolder().getMax();
@@ -93,6 +87,12 @@ public class FProgressBar extends View implements ProgressView
     public int getMin()
     {
         return getHolder().getMin();
+    }
+
+    @Override
+    public int getProgress()
+    {
+        return getHolder().getProgress();
     }
 
     @Override

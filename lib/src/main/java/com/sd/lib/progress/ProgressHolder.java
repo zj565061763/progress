@@ -2,16 +2,10 @@ package com.sd.lib.progress;
 
 public abstract class ProgressHolder implements ProgressView
 {
-    private int mProgress = 0;
-
     private int mMin = 0;
     private int mMax = 100;
 
-    @Override
-    public int getProgress()
-    {
-        return mProgress;
-    }
+    private int mProgress = 0;
 
     @Override
     public int getMax()
@@ -22,6 +16,12 @@ public abstract class ProgressHolder implements ProgressView
     public int getMin()
     {
         return mMin;
+    }
+
+    @Override
+    public int getProgress()
+    {
+        return mProgress;
     }
 
     @Override

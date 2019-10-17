@@ -3,13 +3,6 @@ package com.sd.lib.progress;
 public interface ProgressView
 {
     /**
-     * 返回当前的进度
-     *
-     * @return
-     */
-    int getProgress();
-
-    /**
      * 返回最大进度，默认100
      *
      * @return
@@ -22,6 +15,13 @@ public interface ProgressView
      * @return
      */
     int getMin();
+
+    /**
+     * 返回当前的进度
+     *
+     * @return
+     */
+    int getProgress();
 
     /**
      * 返回进度百分比[0-1]
