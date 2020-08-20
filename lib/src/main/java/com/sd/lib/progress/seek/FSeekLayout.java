@@ -195,6 +195,19 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         }
     }
 
+    @Override
+    public void setThumbView(View view)
+    {
+        if (mThumbView != view)
+        {
+            if (view != null && view.getParent() != this)
+                throw new IllegalArgumentException("view should be child of " + FSeekLayout.this);
+
+            mThumbView = view;
+            layoutThumb();
+        }
+    }
+
     private void notifyProgressChanged(boolean isTouch)
     {
         synchronizeChildrenProgress();
@@ -260,7 +273,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     {
         super.onViewAdded(child);
         if (child.getId() == R.id.lib_progress_seek_thumb)
-            mThumbView = child;
+            setThumbView(child);
 
         final LayoutParams params = (LayoutParams) child.getLayoutParams();
         if (params.gravity == LayoutParams.UNSPECIFIED_GRAVITY)
@@ -281,7 +294,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     {
         super.onViewRemoved(child);
         if (mThumbView == child)
-            mThumbView = null;
+            setThumbView(null);
 
         if (mListProgressView != null && child instanceof ProgressView)
         {
@@ -419,6 +432,9 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         @Override
         public void layoutThumb()
         {
+            if (mThumbView == null)
+                return;
+
             final float percent = getProgressPercent();
             final int left = (int) (getStartBound() + getAvailableSize() * percent);
             mThumbView.layout(left, mThumbView.getTop(), left + mThumbView.getMeasuredWidth(), mThumbView.getBottom());
@@ -433,7 +449,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         @Override
         public int getThumbSize()
         {
-            return mThumbView.getWidth();
+            return mThumbView == null ? 0 : mThumbView.getWidth();
         }
 
         @Override
@@ -472,6 +488,9 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         @Override
         public void layoutThumb()
         {
+            if (mThumbView == null)
+                return;
+
             final float percent = 1.0f - getProgressPercent();
             final int top = (int) (getStartBound() + getAvailableSize() * percent);
             mThumbView.layout(mThumbView.getLeft(), top, mThumbView.getRight(), top + mThumbView.getHeight());
@@ -486,7 +505,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         @Override
         public int getThumbSize()
         {
-            return mThumbView.getHeight();
+            return mThumbView == null ? 0 : mThumbView.getHeight();
         }
 
         @Override

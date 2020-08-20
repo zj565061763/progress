@@ -1,5 +1,7 @@
 package com.sd.lib.progress.seek;
 
+import android.view.View;
+
 import com.sd.lib.progress.core.ProgressView;
 
 public interface SeekLayout extends ProgressView
@@ -45,6 +47,13 @@ public interface SeekLayout extends ProgressView
      * @param synchronize
      */
     void setSynchronizeProgress(boolean synchronize);
+
+    /**
+     * 设置手柄View
+     *
+     * @param view
+     */
+    void setThumbView(View view);
 
     interface OnProgressChangeCallback
     {
