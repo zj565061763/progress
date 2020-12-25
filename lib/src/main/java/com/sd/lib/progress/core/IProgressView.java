@@ -1,6 +1,6 @@
 package com.sd.lib.progress.core;
 
-public interface ProgressView
+public interface IProgressView
 {
     /**
      * 返回最大进度，默认100
@@ -78,6 +78,6 @@ public interface ProgressView
          * @param futureProgress 即将被设置的进度
          * @return true-拦截掉
          */
-        boolean interceptProgress(ProgressView progressView, int futureProgress);
+        boolean interceptProgress(IProgressView progressView, int futureProgress);
     }
 }

@@ -1,12 +1,12 @@
 package com.sd.lib.progress.core.interceptor;
 
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 
-public class CombineProgressInterceptor implements ProgressView.ProgressInterceptor
+public class CombineProgressInterceptor implements IProgressView.ProgressInterceptor
 {
-    private final ProgressView.ProgressInterceptor[] mInterceptors;
+    private final IProgressView.ProgressInterceptor[] mInterceptors;
 
-    public CombineProgressInterceptor(ProgressView.ProgressInterceptor... interceptors)
+    public CombineProgressInterceptor(IProgressView.ProgressInterceptor... interceptors)
     {
         if (interceptors == null || interceptors.length <= 0)
             throw new IllegalArgumentException("interceptors is empty");
@@ -15,9 +15,9 @@ public class CombineProgressInterceptor implements ProgressView.ProgressIntercep
     }
 
     @Override
-    public boolean interceptProgress(ProgressView progressView, int futureProgress)
+    public boolean interceptProgress(IProgressView progressView, int futureProgress)
     {
-        for (ProgressView.ProgressInterceptor item : mInterceptors)
+        for (IProgressView.ProgressInterceptor item : mInterceptors)
         {
             if (item.interceptProgress(progressView, futureProgress))
                 return true;

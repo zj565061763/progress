@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.sd.lib.progress.pgb.FProgressBar;
 import com.sd.lib.progress.seek.FSeekLayout;
-import com.sd.lib.progress.seek.SeekLayout;
+import com.sd.lib.progress.seek.ISeekLayout;
 
 public class SeekBarActivity extends AppCompatActivity
 {
@@ -26,30 +26,30 @@ public class SeekBarActivity extends AppCompatActivity
         mProgressBar.setOrientation(FProgressBar.Orientation.Vertical);
         mProgressBar.setStartProgress(0);
 
-        mSeekLayout.setOrientation(SeekLayout.Orientation.Vertical);
+        mSeekLayout.setOrientation(ISeekLayout.Orientation.Vertical);
         mSeekLayout.setMax(50);
         mSeekLayout.setMin(-50);
         mSeekLayout.setProgress(0);
 
-        mSeekLayout.setOnProgressChangeCallback(new SeekLayout.OnProgressChangeCallback()
+        mSeekLayout.setOnProgressChangeCallback(new ISeekLayout.OnProgressChangeCallback()
         {
             @Override
-            public void onProgressChanged(SeekLayout seekLayout, int progress, boolean isTouch)
+            public void onProgressChanged(ISeekLayout seekLayout, int progress, boolean isTouch)
             {
                 Log.i(TAG, "onProgressChanged: " + progress + " isTouch:" + isTouch);
             }
         });
 
-        mSeekLayout.setOnTrackingTouchCallback(new SeekLayout.OnTrackingTouchCallback()
+        mSeekLayout.setOnTrackingTouchCallback(new ISeekLayout.OnTrackingTouchCallback()
         {
             @Override
-            public void onStartTrackingTouch(SeekLayout seekLayout)
+            public void onStartTrackingTouch(ISeekLayout seekLayout)
             {
                 Log.i(TAG, "onStartTrackingTouch: " + seekLayout.getProgress());
             }
 
             @Override
-            public void onStopTrackingTouch(SeekLayout seekLayout, boolean hasActionMove)
+            public void onStopTrackingTouch(ISeekLayout seekLayout, boolean hasActionMove)
             {
                 Log.i(TAG, "onStopTrackingTouch: " + seekLayout.getProgress() + " hasActionMove:" + hasActionMove);
             }

@@ -1,11 +1,11 @@
 package com.sd.lib.progress.core.interceptor;
 
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 
 /**
  * 最小进度拦截器
  */
-public class MinProgressInterceptor implements ProgressView.ProgressInterceptor
+public class MinProgressInterceptor implements IProgressView.ProgressInterceptor
 {
     private final int mMinProgress;
 
@@ -15,7 +15,7 @@ public class MinProgressInterceptor implements ProgressView.ProgressInterceptor
     }
 
     @Override
-    public boolean interceptProgress(ProgressView progressView, int futureProgress)
+    public boolean interceptProgress(IProgressView progressView, int futureProgress)
     {
         if (futureProgress < mMinProgress)
             return true;

@@ -2,9 +2,9 @@ package com.sd.lib.progress.seek;
 
 import android.view.View;
 
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 
-public interface SeekLayout extends ProgressView
+public interface ISeekLayout extends IProgressView
 {
     /**
      * 返回当前方向{@link Orientation}
@@ -64,7 +64,7 @@ public interface SeekLayout extends ProgressView
          * @param progress   进度[0-1]
          * @param isTouch    true-拖动
          */
-        void onProgressChanged(SeekLayout seekLayout, int progress, boolean isTouch);
+        void onProgressChanged(ISeekLayout seekLayout, int progress, boolean isTouch);
     }
 
     /**
@@ -77,7 +77,7 @@ public interface SeekLayout extends ProgressView
          *
          * @param seekLayout
          */
-        void onStartTrackingTouch(SeekLayout seekLayout);
+        void onStartTrackingTouch(ISeekLayout seekLayout);
 
         /**
          * 停止触摸
@@ -85,7 +85,7 @@ public interface SeekLayout extends ProgressView
          * @param seekLayout
          * @param hasActionMove 开始到停止的过程中是否触发过{@link android.view.MotionEvent#ACTION_MOVE}，true-触发过
          */
-        void onStopTrackingTouch(SeekLayout seekLayout, boolean hasActionMove);
+        void onStopTrackingTouch(ISeekLayout seekLayout, boolean hasActionMove);
     }
 
     enum Orientation

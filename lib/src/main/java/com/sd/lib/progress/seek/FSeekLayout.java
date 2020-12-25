@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.sd.lib.progress.R;
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 import com.sd.lib.progress.core.holder.ProgressHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FSeekLayout extends FrameLayout implements SeekLayout
+public class FSeekLayout extends FrameLayout implements ISeekLayout
 {
     private View mThumbView;
 
@@ -28,7 +28,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     // 是否同步进度给子view
     private boolean mSynchronizeProgress = true;
     // 保存所有子view
-    private List<ProgressView> mListProgressView;
+    private List<IProgressView> mListProgressView;
 
     /**
      * 在一次的手指接触到离开的过程中是否触发过{@link MotionEvent#ACTION_MOVE}
@@ -53,7 +53,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
             mHolder = new ProgressHolder()
             {
                 @Override
-                protected ProgressView getProgressView()
+                protected IProgressView getProgressView()
                 {
                     return FSeekLayout.this;
                 }
@@ -68,7 +68,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         return mHolder;
     }
 
-    private List<ProgressView> getListProgressView()
+    private List<IProgressView> getListProgressView()
     {
         if (mListProgressView == null)
             mListProgressView = new ArrayList<>(1);
@@ -223,14 +223,14 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     {
         if (mListProgressView != null && mSynchronizeProgress)
         {
-            for (ProgressView item : mListProgressView)
+            for (IProgressView item : mListProgressView)
             {
                 synchronizeChildProgress(item);
             }
         }
     }
 
-    private void synchronizeChildProgress(ProgressView view)
+    private void synchronizeChildProgress(IProgressView view)
     {
         if (mSynchronizeProgress)
             view.setProgress(getHolder().getProgress());
@@ -242,14 +242,14 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
     {
         if (mListProgressView != null)
         {
-            for (ProgressView item : mListProgressView)
+            for (IProgressView item : mListProgressView)
             {
                 synchronizeChildBound(item);
             }
         }
     }
 
-    private void synchronizeChildBound(ProgressView view)
+    private void synchronizeChildBound(IProgressView view)
     {
         view.setMax(getHolder().getMax());
         view.setMin(getHolder().getMin());
@@ -279,9 +279,9 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         if (params.gravity == LayoutParams.UNSPECIFIED_GRAVITY)
             params.gravity = Gravity.CENTER;
 
-        if (child instanceof ProgressView)
+        if (child instanceof IProgressView)
         {
-            final ProgressView view = (ProgressView) child;
+            final IProgressView view = (IProgressView) child;
 
             synchronizeChildBound(view);
             synchronizeChildProgress(view);
@@ -296,7 +296,7 @@ public class FSeekLayout extends FrameLayout implements SeekLayout
         if (mThumbView == child)
             setThumbView(null);
 
-        if (mListProgressView != null && child instanceof ProgressView)
+        if (mListProgressView != null && child instanceof IProgressView)
         {
             mListProgressView.remove(child);
             if (mListProgressView.isEmpty())

@@ -1,8 +1,8 @@
 package com.sd.lib.progress.pgb;
 
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 
-public interface ProgressBar extends ProgressView
+public interface IProgressBar extends IProgressView
 {
     /**
      * 返回从哪个进度开始绘制起始进度

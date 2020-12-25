@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.sd.lib.progress.core.interceptor.MinProgressInterceptor;
 import com.sd.lib.progress.seek.FSeekLayout;
-import com.sd.lib.progress.seek.SeekLayout;
+import com.sd.lib.progress.seek.ISeekLayout;
 
 public class SeekLayoutActivity extends AppCompatActivity
 {
@@ -21,7 +21,7 @@ public class SeekLayoutActivity extends AppCompatActivity
         setContentView(R.layout.activity_seek_layout);
         mSeekLayout = findViewById(R.id.seek_layout);
 
-        mSeekLayout.setOrientation(SeekLayout.Orientation.Horizontal);
+        mSeekLayout.setOrientation(ISeekLayout.Orientation.Horizontal);
 
         mSeekLayout.setProgress(50);
         mSeekLayout.setMax(100);
@@ -29,10 +29,10 @@ public class SeekLayoutActivity extends AppCompatActivity
         // 设置进度拦截器，最小进度为20
         mSeekLayout.setProgressInterceptor(new MinProgressInterceptor(20));
 
-        mSeekLayout.setOnProgressChangeCallback(new SeekLayout.OnProgressChangeCallback()
+        mSeekLayout.setOnProgressChangeCallback(new ISeekLayout.OnProgressChangeCallback()
         {
             @Override
-            public void onProgressChanged(SeekLayout seekLayout, int progress, boolean isTouch)
+            public void onProgressChanged(ISeekLayout seekLayout, int progress, boolean isTouch)
             {
                 Log.i(TAG, "onProgressChanged: " + progress + " isTouch:" + isTouch);
             }

@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.sd.lib.progress.R;
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 import com.sd.lib.progress.core.holder.ProgressBarHolder;
 
-public class FProgressBar extends View implements ProgressBar
+public class FProgressBar extends View implements IProgressBar
 {
     public enum Orientation
     {
@@ -68,7 +68,7 @@ public class FProgressBar extends View implements ProgressBar
             mHolder = new ProgressBarHolder()
             {
                 @Override
-                protected ProgressView getProgressView()
+                protected IProgressView getProgressView()
                 {
                     return FProgressBar.this;
                 }

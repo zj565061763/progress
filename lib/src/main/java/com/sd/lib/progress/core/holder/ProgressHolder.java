@@ -1,8 +1,8 @@
 package com.sd.lib.progress.core.holder;
 
-import com.sd.lib.progress.core.ProgressView;
+import com.sd.lib.progress.core.IProgressView;
 
-public abstract class ProgressHolder implements ProgressView
+public abstract class ProgressHolder implements IProgressView
 {
     private int mMin = 0;
     private int mMax = 100;
@@ -117,7 +117,7 @@ public abstract class ProgressHolder implements ProgressView
         mProgressInterceptor = progressInterceptor;
     }
 
-    protected abstract ProgressView getProgressView();
+    protected abstract IProgressView getProgressView();
 
     protected abstract void onProgressFixIntoRange();
 }
