@@ -398,6 +398,8 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
                 final int action = event.getAction();
                 if (action == MotionEvent.ACTION_DOWN)
                 {
+                    requestDisallowInterceptTouchEvent(true);
+
                     mHasActionMove = false;
                     if (mOnTrackingTouchCallback != null)
                         mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
@@ -415,6 +417,8 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
 
                 if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
                 {
+                    requestDisallowInterceptTouchEvent(false);
+
                     final boolean hasActionMove = mHasActionMove;
                     mHasActionMove = false;
 
