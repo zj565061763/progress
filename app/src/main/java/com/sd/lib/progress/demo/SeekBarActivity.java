@@ -1,8 +1,9 @@
 package com.sd.lib.progress.demo;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sd.lib.progress.pgb.FProgressBar;
 import com.sd.lib.progress.seek.FSeekLayout;
@@ -24,6 +25,7 @@ public class SeekBarActivity extends AppCompatActivity
         mProgressBar = findViewById(R.id.progress_bar);
 
         mProgressBar.setOrientation(FProgressBar.Orientation.Vertical);
+        // 设置从0开始绘制起始进度
         mProgressBar.setStartProgress(0);
 
         mSeekLayout.setOrientation(ISeekLayout.Orientation.Vertical);
