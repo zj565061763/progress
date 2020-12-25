@@ -34,7 +34,7 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
      * 在一次的手指接触到离开的过程中是否触发过{@link MotionEvent#ACTION_MOVE}
      */
     private boolean mHasActionMove = false;
-
+    // 是否正在触摸
     private boolean mIsTouching = false;
 
     private OnProgressChangeCallback mOnProgressChangeCallback;
@@ -153,7 +153,7 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
     @Override
     public boolean isTouching()
     {
-        return false;
+        return mIsTouching;
     }
 
     @Override
