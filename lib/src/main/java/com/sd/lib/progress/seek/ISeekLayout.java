@@ -14,6 +14,13 @@ public interface ISeekLayout extends IProgressView
     Orientation getOrientation();
 
     /**
+     * 是否正在触摸
+     *
+     * @return
+     */
+    boolean isTouching();
+
+    /**
      * 设置进度变化回调
      *
      * @param callback

@@ -35,6 +35,8 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
      */
     private boolean mHasActionMove = false;
 
+    private boolean mIsTouching = false;
+
     private OnProgressChangeCallback mOnProgressChangeCallback;
     private OnTrackingTouchCallback mOnTrackingTouchCallback;
 
@@ -146,6 +148,12 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
     public Orientation getOrientation()
     {
         return mOrientation;
+    }
+
+    @Override
+    public boolean isTouching()
+    {
+        return false;
     }
 
     @Override
@@ -402,6 +410,8 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
                 requestDisallowInterceptTouchEvent(true);
 
                 mHasActionMove = false;
+                mIsTouching = true;
+
                 if (mOnTrackingTouchCallback != null)
                     mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
             } else if (action == MotionEvent.ACTION_MOVE)
@@ -422,6 +432,7 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
 
                 final boolean hasActionMove = mHasActionMove;
                 mHasActionMove = false;
+                mIsTouching = false;
 
                 if (mOnTrackingTouchCallback != null)
                     mOnTrackingTouchCallback.onStopTrackingTouch(FSeekLayout.this, hasActionMove);
@@ -549,5 +560,19 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
         if (mOrientationHandler.check())
             mOrientationHandler.onTouchEvent(event);
         return mIsTouchable;
+    }
+
+    @Override
+    protected void onAttachedToWindow()
+    {
+        super.onAttachedToWindow();
+        mIsTouching = false;
+    }
+
+    @Override
+    protected void onDetachedFromWindow()
+    {
+        super.onDetachedFromWindow();
+        mIsTouching = false;
     }
 }
