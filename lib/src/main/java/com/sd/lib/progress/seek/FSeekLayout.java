@@ -317,6 +317,23 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
         return mThumbView == null ? null : (LayoutParams) mThumbView.getLayoutParams();
     }
 
+    private void setTouching(boolean touching)
+    {
+        if (mIsTouching != touching)
+        {
+            mIsTouching = touching;
+            if (touching)
+            {
+                if (mOnTrackingTouchCallback != null)
+                    mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
+            } else
+            {
+                if (mOnTrackingTouchCallback != null)
+                    mOnTrackingTouchCallback.onStopTrackingTouch(FSeekLayout.this, mHasActionMove);
+            }
+        }
+    }
+
     private abstract class OrientationHandler
     {
         public boolean check()
@@ -408,15 +425,12 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
             if (action == MotionEvent.ACTION_DOWN)
             {
                 requestDisallowInterceptTouchEvent(true);
-
                 mHasActionMove = false;
-                mIsTouching = true;
-
-                if (mOnTrackingTouchCallback != null)
-                    mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
+                setTouching(true);
             } else if (action == MotionEvent.ACTION_MOVE)
             {
                 mHasActionMove = true;
+                setTouching(true);
             }
 
             final int value = getTouchEventValue(event) - getThumbSize() / 2;
@@ -429,13 +443,8 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
             {
                 requestDisallowInterceptTouchEvent(false);
-
-                final boolean hasActionMove = mHasActionMove;
+                setTouching(false);
                 mHasActionMove = false;
-                mIsTouching = false;
-
-                if (mOnTrackingTouchCallback != null)
-                    mOnTrackingTouchCallback.onStopTrackingTouch(FSeekLayout.this, hasActionMove);
             }
         }
 
