@@ -393,38 +393,38 @@ public class FSeekLayout extends FrameLayout implements ISeekLayout
 
         public final void onTouchEvent(MotionEvent event)
         {
-            if (mIsTouchable)
+            if (!mIsTouchable)
+                return;
+
+            final int action = event.getAction();
+            if (action == MotionEvent.ACTION_DOWN)
             {
-                final int action = event.getAction();
-                if (action == MotionEvent.ACTION_DOWN)
-                {
-                    requestDisallowInterceptTouchEvent(true);
+                requestDisallowInterceptTouchEvent(true);
 
-                    mHasActionMove = false;
-                    if (mOnTrackingTouchCallback != null)
-                        mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
-                } else if (action == MotionEvent.ACTION_MOVE)
-                {
-                    mHasActionMove = true;
-                }
+                mHasActionMove = false;
+                if (mOnTrackingTouchCallback != null)
+                    mOnTrackingTouchCallback.onStartTrackingTouch(FSeekLayout.this);
+            } else if (action == MotionEvent.ACTION_MOVE)
+            {
+                mHasActionMove = true;
+            }
 
-                final int value = getTouchEventValue(event) - getThumbSize() / 2;
-                final float percent = getBoundPercent(value);
-                final int progress = getPercentProgress(percent);
+            final int value = getTouchEventValue(event) - getThumbSize() / 2;
+            final float percent = getBoundPercent(value);
+            final int progress = getPercentProgress(percent);
 
-                if (getHolder().setProgress(progress))
-                    notifyProgressChanged(true);
+            if (getHolder().setProgress(progress))
+                notifyProgressChanged(true);
 
-                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
-                {
-                    requestDisallowInterceptTouchEvent(false);
+            if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
+            {
+                requestDisallowInterceptTouchEvent(false);
 
-                    final boolean hasActionMove = mHasActionMove;
-                    mHasActionMove = false;
+                final boolean hasActionMove = mHasActionMove;
+                mHasActionMove = false;
 
-                    if (mOnTrackingTouchCallback != null)
-                        mOnTrackingTouchCallback.onStopTrackingTouch(FSeekLayout.this, hasActionMove);
-                }
+                if (mOnTrackingTouchCallback != null)
+                    mOnTrackingTouchCallback.onStopTrackingTouch(FSeekLayout.this, hasActionMove);
             }
         }
 
